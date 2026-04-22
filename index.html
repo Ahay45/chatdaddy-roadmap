@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ChatDaddy — 1 Year Roadmap 2026</title>
+<style>
+  :root {
+    --green: #00c896;
+    --green-dim: #00c89622;
+    --blue: #3b82f6;
+    --blue-dim: #3b82f620;
+    --purple: #8b5cf6;
+    --purple-dim: #8b5cf620;
+    --orange: #f59e0b;
+    --orange-dim: #f59e0b20;
+    --red: #ef4444;
+    --red-dim: #ef444420;
+    --bg: #0f1117;
+    --surface: #181c27;
+    --surface2: #1e2335;
+    --border: #2a3050;
+    --text: #e2e8f0;
+    --text-dim: #64748b;
+    --text-muted: #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, #0f1117 0%, #181c27 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, #00c89615 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-meta { font-size: 12px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
+  header h1 span { color: var(--green); }
+  .header-sub { color: var(--text-muted); font-size: 15px; margin-top: 8px; }
+  .header-badges { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .badge {
+    font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+    border: 1px solid; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .badge-green { color: var(--green); border-color: var(--green); background: var(--green-dim); }
+  .badge-blue  { color: var(--blue);  border-color: var(--blue);  background: var(--blue-dim); }
+  .badge-purple{ color: var(--purple);border-color: var(--purple);background: var(--purple-dim); }
+  .badge-orange{ color: var(--orange);border-color: var(--orange);background: var(--orange-dim); }
+
+  /* ── Layout ── */
+  main { max-width: 1280px; margin: 0 auto; padding: 40px 48px 80px; }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 20px; margin-top: 48px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── KPI Bar ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+  .kpi-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+  .kpi-value { font-size: 28px; font-weight: 700; margin: 6px 0 2px; }
+  .kpi-sub { font-size: 12px; color: var(--text-muted); }
+  .kpi-green .kpi-value { color: var(--green); }
+  .kpi-blue  .kpi-value { color: var(--blue); }
+  .kpi-purple.kpi-value { color: var(--purple); }
+  .kpi-orange .kpi-value { color: var(--orange); }
+
+  /* ── Calendar Strip ── */
+  .cal-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cal-months {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .cal-month {
+    padding: 14px 0 12px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .cal-month:last-child { border-right: none; }
+  .cal-month-name {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .cal-month-year { font-size: 10px; color: var(--text-dim); }
+  .cal-month.q1-month { background: var(--green-dim); }
+  .cal-month.q1-month .cal-month-name { color: var(--green); }
+  .cal-month.q2-month { background: var(--blue-dim); }
+  .cal-month.q2-month .cal-month-name { color: var(--blue); }
+  .cal-month.q3-month { background: var(--purple-dim); }
+  .cal-month.q3-month .cal-month-name { color: var(--purple); }
+  .cal-month.q4-month { background: var(--orange-dim); }
+  .cal-month.q4-month .cal-month-name { color: var(--orange); }
+  .cal-today-marker {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 4px; background: #fff; border-radius: 0 0 2px 2px;
+    opacity: 0.6;
+  }
+  .cal-legend {
+    display: flex; gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .cal-leg-item {
+    flex: 1; padding: 10px 14px;
+    font-size: 11px; font-weight: 600;
+    border-right: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cal-leg-item:last-child { border-right: none; }
+  .cal-leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .cal-leg-title { color: var(--text); }
+  .cal-leg-sub { font-size: 10px; color: var(--text-dim); font-weight: 400; margin-left: auto; }
+
+  /* ── Timeline ── */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 16px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--blue), var(--purple), var(--orange));
+  }
+  .quarter {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 20px;
+    position: relative;
+  }
+  .quarter:first-child { border-radius: 12px 0 0 12px; }
+  .quarter:last-child  { border-radius: 0 12px 12px 0; }
+  .quarter + .quarter  { border-left: none; }
+  .q-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    position: absolute; top: 29px; left: 20px;
+    border: 2px solid var(--bg);
+  }
+  .q1 .q-dot { background: var(--green); }
+  .q2 .q-dot { background: var(--blue); }
+  .q3 .q-dot { background: var(--purple); }
+  .q4 .q-dot { background: var(--orange); }
+  .q-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding-left: 22px; color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .q1 .q-label { color: var(--green); }
+  .q2 .q-label { color: var(--blue); }
+  .q3 .q-label { color: var(--purple); }
+  .q4 .q-label { color: var(--orange); }
+  .q-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .q-dates { font-size: 11px; color: var(--text-dim); margin-bottom: 16px; }
+  .q-theme {
+    font-size: 12px; font-weight: 600; padding: 5px 10px;
+    border-radius: 6px; margin-bottom: 16px; display: inline-block;
+  }
+  .q1 .q-theme { background: var(--green-dim); color: var(--green); }
+  .q2 .q-theme { background: var(--blue-dim);  color: var(--blue); }
+  .q3 .q-theme { background: var(--purple-dim);color: var(--purple); }
+  .q4 .q-theme { background: var(--orange-dim);color: var(--orange); }
+  .q-items { list-style: none; }
+  .q-items li {
+    font-size: 13px; color: var(--text-muted);
+    padding: 5px 0; border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .q-items li:last-child { border-bottom: none; }
+  .q-items li::before { content: '→'; color: var(--text-dim); flex-shrink: 0; }
+
+  /* ── Pillars ── */
+  .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .pillar-icon { font-size: 28px; margin-bottom: 12px; }
+  .pillar-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .pillar-sub { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+  .pillar-items { list-style: none; }
+  .pillar-items li {
+    font-size: 13px; color: var(--text-muted);
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .pillar-items li:last-child { border-bottom: none; }
+  .pill {
+    font-size: 10px; font-weight: 600; padding: 2px 7px;
+    border-radius: 10px; flex-shrink: 0; margin-top: 2px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .pill-green  { background: var(--green-dim);  color: var(--green); }
+  .pill-blue   { background: var(--blue-dim);   color: var(--blue); }
+  .pill-purple { background: var(--purple-dim); color: var(--purple); }
+  .pill-orange { background: var(--orange-dim); color: var(--orange); }
+  .pill-red    { background: var(--red-dim);    color: var(--red); }
+
+  /* ── Moat table ── */
+  .moat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .moat-table th {
+    text-align: left; padding: 10px 14px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+  .moat-table td {
+    padding: 12px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .moat-table tr:last-child td { border-bottom: none; }
+  .moat-table td:first-child { font-weight: 600; color: var(--text); }
+  .moat-bar {
+    height: 4px; border-radius: 2px; background: var(--border);
+    margin-top: 4px; overflow: hidden;
+  }
+  .moat-fill { height: 100%; border-radius: 2px; }
+
+  /* ── Team ── */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .team-name { font-weight: 700; font-size: 14px; }
+  .team-role { font-size: 11px; color: var(--text-dim); margin-bottom: 10px; }
+  .team-focus { font-size: 12px; color: var(--text-muted); }
+
+  /* ── Pricing ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .pricing-tier { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); }
+  .pricing-amount { font-size: 24px; font-weight: 800; margin: 10px 0 4px; color: var(--green); }
+  .pricing-desc { font-size: 12px; color: var(--text-muted); }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--text-dim);
+  }
+  footer strong { color: var(--text-muted); }
+
+  @media (max-width: 900px) {
+    header { padding: 28px 24px; }
+    main { padding: 24px 24px 60px; }
+    .cal-months { grid-template-columns: repeat(6, 1fr); }
+    .cal-legend { flex-direction: column; }
+    .cal-leg-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .cal-leg-item:last-child { border-bottom: none; }
+    .timeline { grid-template-columns: 1fr; margin-top: 12px; }
+    .timeline::before { display: none; }
+    .quarter { border-radius: 12px !important; border-left: 1px solid var(--border) !important; margin-bottom: 12px; }
+    footer { flex-direction: column; gap: 8px; padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-meta">ChatDaddy · Product Roadmap</div>
+  <h1>2026 <span>1-Year Roadmap</span></h1>
+  <p class="header-sub">WhatsApp AI Platform · May 2026 → Apr 2027 · Stability → Scale → AI Workforce</p>
+  <div class="header-badges">
+    <span class="badge badge-green">Phase 1 · May–Jul 2026 · Stability</span>
+    <span class="badge badge-blue">Phase 2 · Aug–Oct 2026 · Hardening</span>
+    <span class="badge badge-purple">Phase 3 · Nov 2026–Jan 2027 · AI Launch</span>
+    <span class="badge badge-orange">Phase 4 · Feb–Apr 2027 · Scale</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- KPIs -->
+  <div class="section-title">North Star Metrics</div>
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">CS Auto-Reply</div>
+      <div class="kpi-value">Batch → Full Auto</div>
+      <div class="kpi-sub">10x above expectation today</div>
+    </div>
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-label">AI Agent Clients</div>
+      <div class="kpi-value">0 → 100</div>
+      <div class="kpi-sub">HK SMBs by Apr 2027</div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Avg Response Time</div>
+      <div class="kpi-value">&lt;30s</div>
+      <div class="kpi-sub">AI-handled conversations</div>
+    </div>
+    <div class="kpi-card kpi-blue">
+      <div class="kpi-label">Organic Traffic</div>
+      <div class="kpi-value">+30% MoM</div>
+      <div class="kpi-sub">Next.js SEO rebuild</div>
+    </div>
+    <div class="kpi-card kpi-orange">
+      <div class="kpi-label">Trial → Paid</div>
+      <div class="kpi-value">0 → 25%+</div>
+      <div class="kpi-sub">PLG conversion rate by Phase 3</div>
+    </div>
+    <div class="kpi-card kpi-orange">
+      <div class="kpi-label">Outbound Pipeline</div>
+      <div class="kpi-value">500+ / wk</div>
+      <div class="kpi-sub">Automated competitor outreach</div>
+    </div>
+  </div>
+
+  <!-- Quarterly Timeline -->
+  <div class="section-title">Quarterly Plan</div>
+
+  <!-- Calendar Strip -->
+  <div class="cal-wrap">
+    <div class="cal-months">
+      <div class="cal-month q1-month">
+        <div class="cal-today-marker"></div>
+        <div class="cal-month-name">May</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q1-month">
+        <div class="cal-month-name">Jun</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q1-month">
+        <div class="cal-month-name">Jul</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q2-month">
+        <div class="cal-month-name">Aug</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q2-month">
+        <div class="cal-month-name">Sep</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q2-month">
+        <div class="cal-month-name">Oct</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q3-month">
+        <div class="cal-month-name">Nov</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q3-month">
+        <div class="cal-month-name">Dec</div>
+        <div class="cal-month-year">2026</div>
+      </div>
+      <div class="cal-month q3-month">
+        <div class="cal-month-name">Jan</div>
+        <div class="cal-month-year">2027</div>
+      </div>
+      <div class="cal-month q4-month">
+        <div class="cal-month-name">Feb</div>
+        <div class="cal-month-year">2027</div>
+      </div>
+      <div class="cal-month q4-month">
+        <div class="cal-month-name">Mar</div>
+        <div class="cal-month-year">2027</div>
+      </div>
+      <div class="cal-month q4-month">
+        <div class="cal-month-name">Apr</div>
+        <div class="cal-month-year">2027</div>
+      </div>
+    </div>
+    <div class="cal-legend">
+      <div class="cal-leg-item">
+        <div class="cal-leg-dot" style="background:var(--green)"></div>
+        <span class="cal-leg-title">Phase 1 — Stability</span>
+        <span class="cal-leg-sub">May – Jul 2026</span>
+      </div>
+      <div class="cal-leg-item">
+        <div class="cal-leg-dot" style="background:var(--blue)"></div>
+        <span class="cal-leg-title">Phase 2 — Hardening</span>
+        <span class="cal-leg-sub">Aug – Oct 2026</span>
+      </div>
+      <div class="cal-leg-item">
+        <div class="cal-leg-dot" style="background:var(--purple)"></div>
+        <span class="cal-leg-title">Phase 3 — AI Launch</span>
+        <span class="cal-leg-sub">Nov 2026 – Jan 2027</span>
+      </div>
+      <div class="cal-leg-item">
+        <div class="cal-leg-dot" style="background:var(--orange)"></div>
+        <span class="cal-leg-title">Phase 4 — Scale</span>
+        <span class="cal-leg-sub">Feb – Apr 2027</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="quarter q1">
+      <div class="q-dot"></div>
+      <div class="q-label">Phase 1 · May – Jul 2026</div>
+      <div class="q-title">Stop the Bleeding</div>
+      <div class="q-dates">May 1 → Jul 31, 2026</div>
+      <div class="q-theme">Stability First</div>
+      <ul class="q-items">
+        <li>CS auto-reply: Batch-3 → fully autonomous</li>
+        <li>WhatsApp channel setup: self-serve in &lt;2 min</li>
+        <li>AI chatbot response accuracy baseline set</li>
+        <li>Inbox reliability: zero message loss incidents</li>
+        <li>Platform crash rate reduced (user-facing)</li>
+        <li>Activation funnel instrumented (Amplitude)</li>
+        <li>CS team handles edge cases only</li>
+      </ul>
+    </div>
+
+    <div class="quarter q2">
+      <div class="q-dot"></div>
+      <div class="q-label">Phase 2 · Aug – Oct 2026</div>
+      <div class="q-title">Platform Hardening</div>
+      <div class="q-dates">Aug 1 → Oct 31, 2026</div>
+      <div class="q-theme">Enterprise Features</div>
+      <ul class="q-items">
+        <li>Next.js SEO site fully live</li>
+        <li>CMS publishing: quota-safe workflow</li>
+        <li>Free trial tier launched (14-day, no CC)</li>
+        <li>In-app upgrade prompts at usage limits</li>
+        <li>Automated outbound pipeline at 500+/wk</li>
+        <li>CRM + Inbox UX improvements shipped</li>
+        <li>Multi-channel support stabilised (IG, FB, SMS)</li>
+      </ul>
+    </div>
+
+    <div class="quarter q3">
+      <div class="q-dot"></div>
+      <div class="q-label">Phase 3 · Nov 2026 – Jan 2027</div>
+      <div class="q-title">AI Agent Launch</div>
+      <div class="q-dates">Nov 1, 2026 → Jan 31, 2027</div>
+      <div class="q-theme">AI Workforce MVP</div>
+      <ul class="q-items">
+        <li>AI Agent pilot: 10 HK businesses</li>
+        <li>Industry agents: F&amp;B + insurance verticals</li>
+        <li>Self-organizing agent networks live</li>
+        <li>WhatsApp AI agent KMS evaluation loop</li>
+        <li>Campaigns + Broadcasts revamp</li>
+        <li>Referral loop: invite teammates, earn credits</li>
+        <li>Omnichannel-ready architecture (IG, TG, SMS)</li>
+      </ul>
+    </div>
+
+    <div class="quarter q4">
+      <div class="q-dot"></div>
+      <div class="q-label">Phase 4 · Feb – Apr 2027</div>
+      <div class="q-title">Scale &amp; Compound</div>
+      <div class="q-dates">Feb 1 → Apr 30, 2027</div>
+      <div class="q-theme">Autonomous Workforce</div>
+      <ul class="q-items">
+        <li>AI Agent clients: 10 → 100 HK SMBs</li>
+        <li>Enterprise pilot: 5 large clients</li>
+        <li>Workflow lock-in established (3–6mo users)</li>
+        <li>Expansion nudge: auto-upgrade at 80% usage</li>
+        <li>PQL as primary growth metric</li>
+        <li>Viral loop: powered-by footer on broadcasts</li>
+        <li>Annual strategy offsite (April 2027)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Strategic Pillars -->
+  <div class="section-title">Strategic Pillars</div>
+  <div class="pillars-grid">
+
+    <div class="pillar">
+      <div class="pillar-icon">🤖</div>
+      <div class="pillar-title">AI Agent Business</div>
+      <div class="pillar-sub">Product · Kenny, Ai Li + agents</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">P0</span> CS auto-reply fully autonomous</li>
+        <li><span class="pill pill-blue">P1</span> 10 HK SMB pilot clients (Q3)</li>
+        <li><span class="pill pill-blue">P1</span> F&amp;B + insurance vertical agents</li>
+        <li><span class="pill pill-blue">P1</span> Self-organizing agent networks</li>
+        <li><span class="pill pill-purple">P2</span> WhatsApp AI agent KMS evaluation loop</li>
+        <li><span class="pill pill-purple">P2</span> 100 clients by Q4</li>
+        <li><span class="pill pill-green">P3</span> Enterprise 5-client pilot</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">📈</div>
+      <div class="pillar-title">Growth &amp; SEO</div>
+      <div class="pillar-sub">Platform · David Ooi</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">P0</span> Next.js SEO site complete rebuild</li>
+        <li><span class="pill pill-red">P0</span> CMS quota-safe publishing</li>
+        <li><span class="pill pill-blue">P1</span> Automated outbound at 500+/wk</li>
+        <li><span class="pill pill-blue">P1</span> Competitor 1-star scrape pipeline</li>
+        <li><span class="pill pill-purple">P2</span> Organic traffic +30% MoM</li>
+        <li><span class="pill pill-purple">P2</span> LinkedIn + social automation</li>
+        <li><span class="pill pill-green">P3</span> AEO (AI Engine Optimization)</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">🚀</div>
+      <div class="pillar-title">Product Led Growth</div>
+      <div class="pillar-sub">Product · Akil, David + AI agents</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">P0</span> Fix onboarding crashes → sign up to first message &lt;5 min</li>
+        <li><span class="pill pill-red">P0</span> Instrument activation funnel (Amplitude + Mixpanel)</li>
+        <li><span class="pill pill-blue">P1</span> Free trial tier — 14-day no credit card</li>
+        <li><span class="pill pill-blue">P1</span> In-app upgrade prompts at usage limits</li>
+        <li><span class="pill pill-blue">P1</span> Self-serve channel connection (zero CS touch)</li>
+        <li><span class="pill pill-purple">P2</span> Referral loop — invite teammates, earn credits</li>
+        <li><span class="pill pill-purple">P2</span> Expansion revenue: Pilot → Team auto-nudge at 80% usage</li>
+        <li><span class="pill pill-orange">P3</span> Viral loop — WhatsApp powered-by footer on broadcasts</li>
+        <li><span class="pill pill-orange">P3</span> Track PQL (Product Qualified Leads) as primary growth metric</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">📸</div>
+      <div class="pillar-title">PLG · Instagram Channel Setup</div>
+      <div class="pillar-sub">Self-serve IG DM automation — zero CS touch · Phase 2–3</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">P0</span> Meta Graph API connected → IG publishing live (currently blocked)</li>
+        <li><span class="pill pill-red">P0</span> Self-serve IG Business account connect in &lt;3 steps (OAuth flow)</li>
+        <li><span class="pill pill-blue">P1</span> Auto-reply to IG DMs via AI — same inbox as WhatsApp</li>
+        <li><span class="pill pill-blue">P1</span> IG comment → DM trigger: "Reply keyword in comments → auto-DM lead"</li>
+        <li><span class="pill pill-blue">P1</span> Story mention → auto-respond in DM (high-intent signal)</li>
+        <li><span class="pill pill-purple">P2</span> IG content published from ChatDaddy social agent (already built, needs API)</li>
+        <li><span class="pill pill-purple">P2</span> Unified inbox: IG DMs + WhatsApp in one thread per contact</li>
+        <li><span class="pill pill-orange">P3</span> Viral: "Powered by ChatDaddy AI" tag on IG auto-reply footer</li>
+        <li><span class="pill pill-orange">P3</span> IG-to-WhatsApp handoff: DM conversation moves to WA for deeper engagement</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">👍</div>
+      <div class="pillar-title">PLG · Facebook Channel Setup</div>
+      <div class="pillar-sub">Self-serve FB Messenger + Page automation — zero CS touch · Phase 2–3</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">P0</span> Meta Graph API connected → FB Page publishing live (currently blocked)</li>
+        <li><span class="pill pill-red">P0</span> Self-serve FB Page connect in &lt;3 steps (OAuth flow)</li>
+        <li><span class="pill pill-blue">P1</span> Auto-reply to FB Messenger via AI — same inbox as WhatsApp + IG</li>
+        <li><span class="pill pill-blue">P1</span> FB Post comment → auto-DM trigger (proven high-conversion flow)</li>
+        <li><span class="pill pill-blue">P1</span> FB Lead Form → auto-WhatsApp follow-up within 60 seconds</li>
+        <li><span class="pill pill-purple">P2</span> FB content published from ChatDaddy social agent (already built, needs API)</li>
+        <li><span class="pill pill-purple">P2</span> Unified inbox: FB Messenger + IG + WhatsApp — one view</li>
+        <li><span class="pill pill-orange">P3</span> FB Ad → click-to-WhatsApp → ChatDaddy AI handles conversation (full loop)</li>
+        <li><span class="pill pill-orange">P3</span> Cross-channel broadcast: send campaign to WA + IG + FB simultaneously</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Competitor Strategies -->
+  <div class="section-title">Competitor Strategies to Steal</div>
+  <div class="pillars-grid">
+
+    <div class="pillar">
+      <div class="pillar-icon">🆓</div>
+      <div class="pillar-title">Free Tier (Sleekflow)</div>
+      <div class="pillar-sub">Sleekflow offers a free plan — ChatDaddy has none</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">Steal</span> Free plan: 3 users, 50 conversations/mo, 1 WA channel</li>
+        <li><span class="pill pill-blue">Phase 2</span> Launch as top-of-funnel PLG entry point</li>
+        <li><span class="pill pill-blue">Phase 2</span> Upgrade prompt when user hits limit</li>
+        <li><span class="pill pill-green">Edge</span> ChatDaddy free tier includes Co-existence — no competitor has this</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">🤖</div>
+      <div class="pillar-title">AI on Every Plan (Respond.io)</div>
+      <div class="pillar-sub">Respond.io includes AI even on $79 Starter — ChatDaddy gates it</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">Steal</span> Include basic AI chatbot on all paid tiers</li>
+        <li><span class="pill pill-blue">Phase 2</span> Differentiate: advanced AI (RAG, multi-agent) on higher tiers only</li>
+        <li><span class="pill pill-green">Edge</span> ChatDaddy AI already 10x above expectation — surface it earlier in funnel</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">📚</div>
+      <div class="pillar-title">RAG Knowledge Base (YourGPT / BobChat)</div>
+      <div class="pillar-sub">Competitors let users upload docs — AI answers from their own content</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">Steal</span> Let users upload PDFs, URLs, product catalogues → AI answers from them</li>
+        <li><span class="pill pill-blue">Phase 3</span> "Train your AI in 2 minutes" as core onboarding hook</li>
+        <li><span class="pill pill-purple">Phase 3</span> Show accuracy score after training (e.g. "93% match to your best staff")</li>
+        <li><span class="pill pill-green">Edge</span> Combined with Co-existence — AI + human in same WhatsApp number</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">🧮</div>
+      <div class="pillar-title">ROI Calculator (No Competitor Has This)</div>
+      <div class="pillar-sub">Sierra AI uses outcome-based framing — no WhatsApp competitor has an ROI calc</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">First mover</span> Self-serve ROI calculator: CS staff count × salary → annual savings</li>
+        <li><span class="pill pill-blue">Phase 1</span> Embed on every outbound message, landing page, article CTA</li>
+        <li><span class="pill pill-blue">Phase 1</span> Auto-generate: "You save HK$22,800/year with ChatDaddy AI"</li>
+        <li><span class="pill pill-green">Edge</span> Turns abstract AI value into a real number — closes deals faster</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">🌐</div>
+      <div class="pillar-title">Competitor Capture Pages (Respond.io / WATI)</div>
+      <div class="pillar-sub">ChatDaddy ranks page 1 for only 2 of 101 keywords — competitors dominate</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">Urgent</span> Build "/respond-io-alternative" page (1K–5K searches/mo, score 9)</li>
+        <li><span class="pill pill-red">Urgent</span> Build "/wati-alternative" page (1K–5K searches/mo, score 9)</li>
+        <li><span class="pill pill-red">Urgent</span> Build "/chatdaddy-alternative" defensive page (people searching for this)</li>
+        <li><span class="pill pill-blue">Phase 1</span> Build "/whatsapp-crm" pillar page (5K–50K searches/mo, score 9)</li>
+        <li><span class="pill pill-green">Edge</span> Co-existence is a unique differentiator no competitor can claim</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">💬</div>
+      <div class="pillar-title">WhatsApp-Native Demo Bot (No Competitor Does This)</div>
+      <div class="pillar-sub">All competitors demo via web dashboards — ChatDaddy can demo inside WhatsApp</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">First mover</span> Prospect sends "Hi" to demo number → AI shows real capability in WA</li>
+        <li><span class="pill pill-blue">Phase 2</span> "Send me a customer question and I'll show you how I'd reply"</li>
+        <li><span class="pill pill-purple">Phase 3</span> Self-serve: upload your own conversations → get accuracy score in 2 min</li>
+        <li><span class="pill pill-green">Edge</span> Prospect experiences the exact product in their exact channel — no context switch</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">🌏</div>
+      <div class="pillar-title">Native Multi-language (ManyChat Gap)</div>
+      <div class="pillar-sub">ManyChat and WATI are EN-only — SEA market is EN + ZH + MS</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">Steal</span> AI responds in the language the customer messages in (auto-detect)</li>
+        <li><span class="pill pill-blue">Phase 2</span> Cantonese, Mandarin, Malay, English — same bot, no setup</li>
+        <li><span class="pill pill-purple">Phase 3</span> Localised onboarding flow per market (HK, MY, SG)</li>
+        <li><span class="pill pill-green">Edge</span> SEA-built team understands the linguistic context — US competitors can't replicate</li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-icon">📊</div>
+      <div class="pillar-title">Outcome-Based Proof (Sierra AI — $100M ARR)</div>
+      <div class="pillar-sub">Sierra AI hit $100M ARR with outcome pricing + precise definitions</div>
+      <ul class="pillar-items">
+        <li><span class="pill pill-red">Steal</span> Define "closed ticket" = AI resolved without human takeover → charge on that</li>
+        <li><span class="pill pill-blue">Phase 3</span> Publish monthly "AI resolution rate" dashboard per customer</li>
+        <li><span class="pill pill-purple">Phase 3</span> Case studies with precise before/after: response time, CS headcount, cost saved</li>
+        <li><span class="pill pill-green">Edge</span> ChatDaddy CS agent already 10x above expectation — proof already exists</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Moat Strategy -->
+  <div class="section-title">Competitive Moat Timeline</div>
+  <div class="pillar" style="padding: 0; overflow: hidden;">
+    <table class="moat-table">
+      <thead>
+        <tr>
+          <th>Moat Layer</th>
+          <th>How It's Built</th>
+          <th>Locks In At</th>
+          <th>Strength</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Habit Lock-in</td>
+          <td>Agent becomes a daily-use tool — feels like a team member</td>
+          <td><span class="pill pill-green">1–2 months</span></td>
+          <td>
+            <div class="moat-bar"><div class="moat-fill" style="width:30%;background:var(--green)"></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Workflow Lock-in</td>
+          <td>Agent embedded into core business processes (orders, CS, leads)</td>
+          <td><span class="pill pill-blue">3–6 months</span></td>
+          <td>
+            <div class="moat-bar"><div class="moat-fill" style="width:60%;background:var(--blue)"></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Team Lock-in</td>
+          <td>Human team "can't work without" the AI teammates</td>
+          <td><span class="pill pill-purple">6–12 months</span></td>
+          <td>
+            <div class="moat-bar"><div class="moat-fill" style="width:80%;background:var(--purple)"></div></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Industry Knowledge</td>
+          <td>HK F&B, insurance terminology + customer workflows encoded in KMS</td>
+          <td><span class="pill pill-orange">12+ months</span></td>
+          <td>
+            <div class="moat-bar"><div class="moat-fill" style="width:100%;background:var(--orange)"></div></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pricing -->
+  <div class="section-title">AI Agent Pricing Tiers</div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Pilot</div>
+      <div class="pricing-amount">HK$1,380<span style="font-size:14px;font-weight:400;color:var(--text-dim)">/mo</span></div>
+      <div class="pricing-desc">3–5 agents · Low-risk trial · 10 businesses target</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Team</div>
+      <div class="pricing-amount">HK$5–10K<span style="font-size:14px;font-weight:400;color:var(--text-dim)">/mo</span></div>
+      <div class="pricing-desc">10–50 agents · Proven value · 100 businesses target</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Department</div>
+      <div class="pricing-amount">HK$20–50K<span style="font-size:14px;font-weight:400;color:var(--text-dim)">/mo</span></div>
+      <div class="pricing-desc">50–200 agents · Enterprise pilot · 5 clients target</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Overage</div>
+      <div class="pricing-amount">HK$0.50<span style="font-size:14px;font-weight:400;color:var(--text-dim)">/msg</span></div>
+      <div class="pricing-desc">Above-package usage · Scales with client value</div>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="section-title">Team</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-name">Kenny</div>
+      <div class="team-role">Founder · Product Vision</div>
+      <div class="team-focus">WhatsApp AI strategy, agent OS, platform direction</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Akil Mutawakkil</div>
+      <div class="team-role">Product Designer &amp; PM</div>
+      <div class="team-focus">Product roadmap, UX design, feature prioritisation</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">David Ooi</div>
+      <div class="team-role">CS &amp; Growth Lead</div>
+      <div class="team-focus">CS auto-reply agent, SEO, automated outbound pipeline</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div><strong>ChatDaddy</strong> · 1-Year Roadmap 2026 · Generated 2026-04-22</div>
+  <div>Saved at: <strong>ChatDaddy/EVA/04-companies/chatdaddy/03-projects/chatdaddy-roadmap-2026/index.html</strong></div>
+</footer>
+
+</body>
+</html>
